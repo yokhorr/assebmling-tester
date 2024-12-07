@@ -43,6 +43,14 @@ def main():
             exes.append(['java ' + program[:-6], program])
         elif program[-4:] == ".out" or program[-2:] == ".a":
             exes.append(['./' + program, program])
+        elif program[-4:] == ".exe":
+            if os.name == 'nt':
+                exes.append(['./' + program, program])
+            elif os.name == 'posix':
+                exes.append(['wine ' + program, program])
+            else:
+                print("Unknown os: " + os.name)
+                sys.exit(1)
         else:
             print("Unknown file type: " + program)
             sys.exit(1)

@@ -3,3 +3,7 @@ cmake-build-debug/
 CMakeLists.txt
 *.out
 *.class
+*.cpp
+*.exe
+*.java
+*.hpp
