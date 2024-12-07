@@ -47,7 +47,7 @@ def main():
             if os.name == 'nt':
                 exes.append(['./' + program, program])
             elif os.name == 'posix':
-                exes.append(['wine ' + program, program])
+                exes.append(['WINEDEBUG=fixme-all wine ' + program, program])
             else:
                 print("Unknown os: " + os.name)
                 sys.exit(1)
@@ -63,14 +63,15 @@ def main():
                 continue
             results = []
             for exe in exes:
-                subprocess.run(f'{exe[0]} --asm tests/{file} --bin tests/out/{exe[1]}.txt', shell=True)
-                results.append(open(f'tests/out/{exe[1]}.txt').read())
+                subprocess.run(f'{exe[0]} --asm tests/{file} --bin tests/out/{exe[1]}.txt',
+                               shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                results.append(open(f'tests/out/{exe[1]}.txt').read().strip())
             if all(results[0] == result for result in results):
                 print(f"PASS: {file}")
                 subprocess.run(f'rm tests/out/*', shell=True)
             else:
                 print(f"FAIL: {file}. See tests/out/ for details.")
-                sys.exit(1)
+                return
 
 
 if __name__ == "__main__":

@@ -152,7 +152,7 @@ sltiu t3, s1, 10
 xori t4, s0, 0xFF
 ori t5, s1, 0xAA
 andi t6, s0, 0x55
-slli t0, s0, 3
+slli t0, s0, 60
 srli t1, s1, 2
 srai t2, a0, 4
 mul t3, s0, s1
