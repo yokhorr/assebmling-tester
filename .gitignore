@@ -7,3 +7,5 @@ CMakeLists.txt
 *.java
 *.hpp
 tmp/
+output.txt
+
