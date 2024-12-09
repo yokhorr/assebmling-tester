@@ -68,7 +68,10 @@ def main():
                 results.append(open(f'tests/out/{exe[1]}.txt').read().strip())
             if all(results[0] == result for result in results):
                 print(f"PASS: {file}")
-                subprocess.run(f'rm tests/out/*', shell=True)
+                if os.name == 'nt':
+                    subprocess.run(f'del tests\\out\\*', shell=True)
+                else:
+                    subprocess.run(f'rm tests/out/*', shell=True)
             else:
                 print(f"FAIL: {file}. See tests/out/ for details.")
                 return
