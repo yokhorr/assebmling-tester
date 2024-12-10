@@ -1,7 +1,6 @@
 .idea/
 cmake-build-debug/
 CMakeLists.txt
-*.class
 *.cpp
 *.exe
 *.java
