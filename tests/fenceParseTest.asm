@@ -47,7 +47,6 @@ rw
 
 
 
-fence iorw
 
 
 
@@ -82,7 +81,6 @@ fence iorw
 
 
 
-, 13
 
 
 
@@ -233,7 +231,6 @@ fence rwio
 
 
 
-,
 
 
 
@@ -276,7 +273,6 @@ fence rwio
 
 
 
-15
 
 
 
@@ -384,10 +380,8 @@ fence orw
 
 
 
-,
 
 
-i
 
 
 fence 15,15

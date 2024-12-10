@@ -43,6 +43,8 @@ def main():
             exes.append(['java ' + program[:-6], program])
         elif program[-4:] == ".out" or program[-2:] == ".a":
             exes.append(['./' + program, program])
+        elif program[-4:] == ".jar":
+            exes.append(['java -jar ' + program, program])
         elif program[-4:] == ".exe":
             if os.name == 'nt':
                 exes.append(['./' + program, program])
@@ -57,24 +59,29 @@ def main():
     for compile_str in compiles:
         subprocess.run(compile_str, shell=True)
     # loop files in tests directory
-    for root, dirs, files in os.walk("tests"):
-        for file in files:
-            if file == ".keep":
-                continue
-            results = []
-            for exe in exes:
-                subprocess.run(f'{exe[0]} --asm tests/{file} --bin tests/out/{exe[1]}.txt',
-                               shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                results.append(open(f'tests/out/{exe[1]}.txt').read().strip())
-            if all(results[0] == result for result in results):
-                print(f"PASS: {file}")
-                if os.name == 'nt':
-                    subprocess.run(f'del tests\\out\\*', shell=True)
-                else:
-                    subprocess.run(f'rm tests/out/*', shell=True)
+    for file in os.listdir("tests"):
+        if not os.path.isfile(os.path.join("tests", file)):
+            continue
+        results = []
+        logs = []
+        for exe in exes:
+            subprocess.run(f'{exe[0]} --asm tests/{file} --bin tests/out/{exe[1]}.bin',
+                           shell=True, stdout=open(f'tests/out/{exe[1]}.log', 'w'))
+            # if file not found
+            if not os.path.isfile(f'tests/out/{exe[1]}.bin'):
+                print(f"FAIL: {file} by {exe[1]}. See tests/out/ for details.")
+                exit(1)
+            results.append(open(f'tests/out/{exe[1]}.bin').read().strip())
+            logs.append(open(f'tests/out/{exe[1]}.log').read().strip())
+        if all(results[0] == result for result in results) and all(logs[0] == log for log in logs):
+            print(f"PASS: {file}")
+            if os.name == 'nt':
+                subprocess.run(f'del tests\\out\\*', shell=True)
             else:
-                print(f"FAIL: {file}. See tests/out/ for details.")
-                return
+                subprocess.run(f'rm tests/out/*', shell=True)
+        else:
+            print(f"FAIL: {file}. See tests/out/ for details.")
+            return
 
 
 if __name__ == "__main__":

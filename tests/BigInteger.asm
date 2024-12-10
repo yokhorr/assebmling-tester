@@ -1,35 +1,35 @@
-addi x0, zero, 42
-addi x1, zero, 100
+addi x0, zero, 0x12883456
+addi x1, zero, 0x77345678
 sub x2, x1, x0
-addi x3, zero, 50
+addi x3, zero, 0x12345578
 and x4, x2, x3
 ori x5, zero, 0x12345678
-slli x6, x5, 16
-srli x7, x5, 8
-addi x8, zero, 200
+slli x6, x5, 0x8123456
+srli x7, x5, 0x66123478
+addi x8, zero, 0x1234567
 sub x9, x8, x6
-addi x10, zero, 300
+addi x10, zero, 0x1234A78
 add x11, x10, x7
-addi a0, zero, -1
+addi a0, zero, 0xA12346
 lb x0, 12, x2
 lw x1, -2, t0
 add x2, x0, x1
-addi x3, zero, 37
+addi x3, zero, 0xA12346
 sub x4, x2, x3
 lbu x1, -2, t0
 mul x6, x4, x5
 addi x7, zero, 92
 slt x8, x6, x7
-beq x8, zero, 12
-addi x9, zero, 17
+beq x8, zero, 0x77345678
+addi x9, zero, 0x12883456
 add x10, x9, x7
-addi a0, zero, 107
+addi a0, zero, 0x66123478
 addi a0, zero, 0
-addi    s0, zero, 0x100         
+addi    s0, zero, 0x12345678
 addi    s1, zero, 0x400
 addi    s1, s1, 0x500
 addi    s2, zero, 0
-addi    s2, s2, 0x600
+addi    s2, s2, 0x12345578
 addi    s2, s2, 0x600
 addi    s2, s2, 0x600
 addi    s2, s2, 0x600
@@ -37,7 +37,7 @@ addi    a5, s0, 0
 addi    a3, s2, 0
 addi    t0, zero, 0
 addi    t1, zero, 64
-addi    t2, zero, 0
+addi    t2, zero, 0x12345578
 addi    t3, zero, 60
 addi    a4, s1, 0
 addi    t6, zero, 0
@@ -59,7 +59,7 @@ addi    t2, t2, 1
 addi    a5, a5, 32
 addi    a3, a3, 240
 addi    t0, t0, 1
-jalr    zero, 0, ra
+
 addi    t0, zero, 0
 addi    t1, zero, 0
 addi    t2, zero, 0
@@ -69,7 +69,7 @@ and     t3, t3, a0
 add     s0, zero, t2
 addi    s0, s0, 1
 addi    t2, t2, 1
-jalr    zero, 0, ra
+
 add x1, x2, x3
 sub x4, x5, x6
 sll x7, x8, x9
@@ -90,7 +90,7 @@ slli x13, x14, 3
 srli x15, x16, 4
 srai x17, x18, 2
 lb x19, 8, x20
-lh x21, 16, x22
+lh x21, 0x12345578, x22
 lw x23, -12, x24
 lbu x25, -8, x26
 lhu x27, -4, x28
@@ -104,7 +104,7 @@ bge x11, x12, 0x1C
 bltu x13, x14, 0x20
 bgeu x15, x16, 0x24
 jal x17, 0x28
-jalr x18, 0x30, x19
+
 lui x20, 0x1234
 auipc x21, 0x5678
 mul x22, x23, x24
@@ -131,14 +131,14 @@ and t4, s0, s1
 lui t0, 0x1234
 auipc t1, 0x5678
 jal t2, 0x12
-jalr t3, 0x20, t4
+
 beq s0, s1, 0x8
 bne s0, s1, 0xC
 blt s0, s1, 0x10
 bge s0, s1, 0x14
 bltu s0, s1, 0x18
 bgeu s0, s1, 0x1C
-lb t0, -4, s1
+lb t0, 0x12345578, s1
 lh t1, -8, s1
 lw t2, -12, s1
 lbu t3, -16, s1
@@ -147,8 +147,8 @@ sb t5, -24, s1
 sh t6, -28, s1
 sw t0, -32, s1
 addi t1, s0, -5
-slti t2, s1, 7
-sltiu t3, s1, 10
+slti t2, s1, 0x12345578
+sltiu t3, s1, 0x12345578
 xori t4, s0, 0xFF
 ori t5, s1, 0xAA
 andi t6, s0, 0x55
@@ -196,8 +196,8 @@ blt t3, t4, 24
 bge t5, t6, -12
 bltu a0, a1, 14
 bgeu a2, a3, -20
-jal a4, 28
-jalr a5, 36, t0
+jal a4, 0x12345578
+
 lui t1, 0x5678
 auipc t2, 0x1234
 mul t3, t4, t5
